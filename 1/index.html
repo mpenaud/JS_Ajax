@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex,nofollow">
+    <title>JS | AJAX DEMO 1 </title>
+    <link rel="stylesheet" href="http://fr.myebox.com/css/main.min.css" />
+    <link rel="stylesheet" href="http://fr.myebox.com/css/animate.min.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <!-- CSS FILE -->
+    <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+    <!-- Réalisation du script afin de permettre à AJAX de modifier la zone -->
+    <script type="application/javascript" >
+        function afficherTexte() {
+                // instanciation d'un objet XMLHttpRequest
+                var xhr = new XMLHttpRequest();
+                // on associe un traitement à l'événement onreadystatechange
+                // on utilise ici une fonction anonyme
+                xhr.onreadystatechange = function() {
+                    // gestion de la réponse du serveur (requête traitée et réponse prête (4) et status OK (200))
+                    if (xhr.readyState==4 && xhr.status==200) {
+                        // modification du contenu de la page web ici le contenu ayant l'id : <zone_a_changer>
+                        document.getElementById("zone_a_changer").innerHTML = xhr.responseText; 
+                    }
+                }
+                
+                // préparation de la requête HTTP (ici la méthode GET, donneesAjax.txt est la ressource demandée et true signifie mode asynchrone (on n'attend pas la réponse du serveur)). C'est pas son contenu que l'on remplace l'objet <zone_a_changer>
+                xhr.open("GET", "donneesAjax.txt", true); 
+                
+                // envoi de la requête HTTP
+                xhr.send();
+            }
+        </script>
+
+
+
+        <div class="row">
+            <div class="container ctn-demo">    
+                <div class="row">  
+
+
+                    <div class="col-md-12 text-center">
+                        <h1>Démo AJAX</h1>
+                        <h2 style="font-size:18px;line-height: normal">Cliquez sur le bouton ci-dessous pour afficher le message <strong>(sans re-générer la page)</strong></h2>   
+                        <div class="colored-line"></div>                                                
+                        <div class="row ctn-demo">
+
+                         <button type="button" class="btn btn-success" onclick="afficherTexte()">Cliquez ici pour générer le message</button>
+                           
+                        <div>
+                            <h3 id="zone_a_changer" style="color: grey">(Le texte ici va changer)</h3>
+                        </div>
+                           
+
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </body>
+    </html>
