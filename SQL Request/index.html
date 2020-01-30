@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex,nofollow">
+    <title>JS | AJAX REQUETE </title>
+    <link rel="stylesheet" href="http://fr.myebox.com/css/main.min.css" />
+    <link rel="stylesheet" href="http://fr.myebox.com/css/animate.min.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <!-- CSS FILE -->
+    <link rel="stylesheet" href="style.css" />
+
+</head>
+  <body>
+
+
+
+  <script type="text/javascript" >
+    function frappe(chaine) {
+        var xhr = new XMLHttpRequest(); // instanciation d'un objet XMLHttpRequest
+
+        xhr.onreadystatechange = function() // gestion de la réponse du serveur
+        {
+            if (xhr.readyState==4 && xhr.status==200)
+            {
+                document.getElementById("suggestions").innerHTML = xhr.responseText; // modification du contenu de la page web
+            }
+        }
+        
+        xhr.open("GET", "suggestions.php?frappe="+chaine, true); // préparation de la requête HTTP (ici la méthode GET, appel d'un script PHP avec un paramètre)
+        xhr.send(); // envoi de la requête HTTP
+    }
+
+  </script>
+
+  <h2>Google des prénoms</h2>
+    <form action=""> 
+    Recherche: <input list="google" id="nom" onkeyup="frappe(this.value)" />
+    <datalist id="google">
+    <span id="suggestions"></span>
+    </datalist>
+    </form>
+
+
+
+
+  </body>
+</html>
+
+
